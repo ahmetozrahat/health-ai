@@ -4,13 +4,15 @@
 
     <application
         android:allowBackup="true"
+        android:fullBackupContent="false"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/Theme.HealthAI"
-        android:fullBackupContent="false">
-        <activity android:name=".activities.CreateProfileActivity"/>
+        android:theme="@style/Theme.HealthAI">
+        <activity android:name=".activities.ChatLogActivity"
+            android:parentActivityName=".activities.MainActivity"/>
+        <activity android:name=".activities.CreateProfileActivity" />
         <activity android:name=".activities.RegisterActivity" />
         <activity android:name=".activities.LoginActivity" />
         <activity android:name=".activities.MainActivity">

@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#80CBC4</color>
+    <color name="colorPrimaryDark">#000000</color>
+    <color name="colorAccent">#80CBC4</color>
+
+    <color name="black">#FF000000</color>
+    <color name="white">#FFFFFFFF</color>
+
+    <color name="textColorHigh">#DEFFFFFF</color>
+    <color name="textColorMedium">#99FFFFFF</color>
+    <color name="textColorDisabled">#61FFFFFF</color>
+
+    <color name="input_background_color">#212121</color>
+
+    <color name="left_chat_bubble_background">#343435</color>
+    <color name="chat_input_background">#212121</color>
+</resources>

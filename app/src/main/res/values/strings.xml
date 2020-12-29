@@ -5,8 +5,8 @@
     <string name="login_page_username_hint">Username</string>
     <string name="login_page_password_hint">Password</string>
     <string name="login_page_login_text">LOGIN</string>
-    <string name="login_page_register_text">Create a free account.</string>
-    <string name="login_page_skip_text">Continue as a guest.</string>
+    <string name="login_page_register_text">Create a free account</string>
+    <string name="login_page_skip_text">Continue as a guest</string>
 
     <string name="register_page_title">HealthAI Register</string>
     <string name="register_page_username_hint">Username</string>
@@ -14,10 +14,8 @@
     <string name="register_page_password_hint">Password</string>
     <string name="register_page_password2_hint">Password (again)</string>
     <string name="register_page_register_text">REGISTER</string>
-    <string name="register_page_login_text">You have an account? Log in.</string>
+    <string name="register_page_login_text">You have an account? Log in</string>
 
-    <string name="warning_passwords_not_match">Passwords do not match. Please check.</string>
-    <string name="warning_fill_the_blanks">Please fill the necessary fields.</string>
     <string name="create_profile_page_title">HealthAI Profile</string>
     <string name="create_profile_page_name_hint">Name</string>
     <string name="create_profile_page_enter_text">SAVE PROFILE</string>
@@ -26,10 +24,22 @@
     <string name="create_profile_page_height_unit_hint">Unit</string>
     <string name="create_profile_page_weight_hint">Weight</string>
     <string name="create_profile_page_weight_unit_hint">Unit</string>
+
+    <string name="chat_input_hint">Type something&#8230;</string>
+
+    <string name="warning_passwords_not_match">Passwords do not match. Please check.</string>
+    <string name="warning_fill_the_blanks">Please fill the necessary fields.</string>
+
     <string name="male">Male</string>
     <string name="female">Female</string>
     <string name="cms">cm</string>
     <string name="inches">inch</string>
     <string name="kgs">kg</string>
     <string name="lbs">lbs</string>
+    <string name="warning_stt_not_supported">Your devicee does not support Speech to Text feature.</string>
+    <string name="chatbot_picture">chatbot_picture</string>
+    <string name="online">online</string>
+    <string name="main_open_chats">Open Chats</string>
+    <string name="send_button">Send Button</string>
+    <string name="record_button">Record Button</string>
 </resources>

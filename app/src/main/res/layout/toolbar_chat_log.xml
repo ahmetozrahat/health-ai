@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:background="?attr/selectableItemBackgroundBorderless"
+    android:layout_width="fill_parent"
+    android:layout_height="?actionBarSize"
+    >
+    <!-- android:background="?attr/selectableItemBackgroundBorderless" will cause this Custom View to make ripple effect -->
+
+    <LinearLayout
+        android:id="@+id/conversation_image"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_centerVertical="true"
+        android:contentDescription="@string/abc_action_bar_up_description"
+        android:orientation="horizontal">
+
+        <ImageView
+            android:id="@+id/conversation_contact_photo"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:src="@drawable/bot_pp"
+            android:scaleType="fitCenter"
+            android:contentDescription="@string/chatbot_picture"/>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_centerVertical="true"
+        android:layout_toEndOf="@id/conversation_image"
+        android:orientation="vertical"
+        android:paddingBottom="2dp"
+        android:paddingStart="4dp"
+        android:paddingEnd="0dp"
+        android:paddingTop="0dp" >
+
+        <TextView
+            android:id="@+id/action_bar_title_1"
+            android:layout_width="wrap_content"
+            android:layout_height="0dp"
+            android:layout_gravity="center_vertical"
+            android:layout_marginStart="6dp"
+            android:layout_weight="0.6"
+            android:ellipsize="end"
+            android:gravity="center_vertical"
+            android:maxLines="1"
+            android:textSize="18sp"
+            android:text="@string/app_name"
+            android:fontFamily="@font/montserratbold"
+            android:textColor="@color/textColorHigh"/>
+
+        <TextView
+            android:id="@+id/action_bar_title_2"
+            android:layout_width="wrap_content"
+            android:layout_height="0dp"
+            android:layout_marginStart="6dp"
+            android:layout_weight="0.4"
+            android:ellipsize="end"
+            android:text="@string/online"
+            android:fontFamily="@font/montserratmedium"
+            android:textColor="@color/textColorMedium"
+            android:maxLines="1"
+            android:textSize="12sp" />
+
+    </LinearLayout>
+
+</RelativeLayout>
