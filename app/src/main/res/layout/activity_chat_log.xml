@@ -53,7 +53,7 @@
         <EditText
             android:id="@+id/chatlog_input_edittext"
             android:layout_width="0dp"
-            android:layout_height="36dp"
+            android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
             android:layout_marginTop="8dp"
             android:layout_marginEnd="16dp"
@@ -65,35 +65,40 @@
             app:layout_constraintStart_toEndOf="@+id/chatlog_record_button"
             app:layout_constraintTop_toTopOf="parent"
             android:importantForAutofill="no"
-            android:inputType="text"/>
+            android:inputType="textMultiLine"
+            android:maxLines="5"/>
 
         <ImageButton
             android:id="@+id/chatlog_send_button"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginTop="12dp"
             android:layout_marginEnd="12dp"
-            android:padding="6dp"
+            android:layout_marginBottom="12dp"
             android:background="?android:selectableItemBackgroundBorderless"
+            android:contentDescription="@string/send_button"
+            android:padding="6dp"
             android:src="@drawable/ic_baseline_send_24"
             android:tint="@color/textColorDisabled"
             app:layout_constraintBottom_toBottomOf="@+id/chatlog_input_edittext"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="@+id/chatlog_input_edittext"
-            android:contentDescription="@string/send_button"/>
+            app:layout_constraintTop_toTopOf="@+id/chatlog_input_edittext" />
 
         <ImageButton
             android:id="@+id/chatlog_record_button"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="12dp"
+            android:layout_marginTop="12dp"
+            android:layout_marginBottom="12dp"
             android:background="?android:selectableItemBackgroundBorderless"
+            android:contentDescription="@string/record_button"
             android:padding="6dp"
             android:src="@drawable/ic_baseline_mic_24"
             android:tint="@color/textColorDisabled"
             app:layout_constraintBottom_toBottomOf="@+id/chatlog_input_edittext"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="@+id/chatlog_input_edittext"
-            android:contentDescription="@string/record_button"/>
+            app:layout_constraintTop_toTopOf="@+id/chatlog_input_edittext" />
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>

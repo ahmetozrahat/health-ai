@@ -1,6 +1,8 @@
 <resources>
     <string name="app_name">HealthAI</string>
 
+    <string name="server_address">ws://10.0.2.2:8000/ws/chat/</string>
+
     <string name="login_page_title">HealthAI Login</string>
     <string name="login_page_username_hint">Username</string>
     <string name="login_page_password_hint">Password</string>
@@ -36,10 +38,15 @@
     <string name="inches">inch</string>
     <string name="kgs">kg</string>
     <string name="lbs">lbs</string>
-    <string name="warning_stt_not_supported">Your devicee does not support Speech to Text feature.</string>
+    <string name="warning_stt_not_supported">Your device does not support Speech to Text feature.</string>
     <string name="chatbot_picture">chatbot_picture</string>
     <string name="online">online</string>
     <string name="main_open_chats">Open Chats</string>
     <string name="send_button">Send Button</string>
     <string name="record_button">Record Button</string>
+    <string name="tts_speak">Please speak now…</string>
+
+    <string name="chat_online">Online</string>
+    <string name="chat_welcome">Welcome to the Django Chatbot.\nPlease type `help` for the commands list.</string>
+    <string name="chat_error">An unexpected exception has been occurred. The app may function unintended. Please restart the application.</string>
 </resources>
