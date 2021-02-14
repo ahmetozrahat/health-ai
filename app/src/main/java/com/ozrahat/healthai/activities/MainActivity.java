@@ -6,11 +6,15 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.widget.Button;
 
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.ozrahat.healthai.R;
 
 public class MainActivity extends AppCompatActivity {
 
     private Button openChatsButton;
+
+    private FirebaseAuth firebaseAuth;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -23,7 +27,11 @@ public class MainActivity extends AppCompatActivity {
         // Handle click events for UI elements.
         setupListeners();
 
-        startActivity(new Intent(this, LoginActivity.class));
+        // Initialize Firebase Auth.
+        firebaseAuth = FirebaseAuth.getInstance();
+
+        // Check if the user is logged in or not.
+        checkUser();
     }
 
     private void setupComponents() {
@@ -34,4 +42,13 @@ public class MainActivity extends AppCompatActivity {
         openChatsButton.setOnClickListener(v -> startActivity(new Intent(MainActivity.this, ChatLogActivity.class)));
     }
 
+    private void checkUser() {
+        // When the activity starts, we should check if the user logged in.
+        FirebaseUser currentUser = firebaseAuth.getCurrentUser();
+        if(currentUser != null){
+            // User has logged in.
+        }else {
+            startActivity(new Intent(this, LoginActivity.class));
+        }
+    }
 }

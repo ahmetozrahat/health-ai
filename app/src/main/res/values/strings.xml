@@ -49,4 +49,13 @@
     <string name="chat_online">Online</string>
     <string name="chat_welcome">Welcome to the Django Chatbot.\nPlease type `help` for the commands list.</string>
     <string name="chat_error">An unexpected exception has been occurred. The app may function unintended. Please restart the application.</string>
+
+    <string name="alert_dialog_success">Success</string>
+    <string name="alert_dialog_warning">Warning</string>
+
+    <string name="alert_dialog_verification_sent">You have been successfully created your account. We have sent an email to %email. Please verify your account.</string>
+    <string name="alert_dialog_not_verified">Looks like you haven\'t been verified your account. Please check your inbox to verify your email.</string>
+
+    <string name="button_positive">Okay</string>
+    <string name="button_send_again">Send Again</string>
 </resources>
