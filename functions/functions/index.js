@@ -10,7 +10,7 @@ exports.createUser = functions.https.onCall(async(data, context) => {
     const userInfo = {
         userName: data.userName,
         email: data.email,
-        dateJoined: admin.firestore.Timestamp().fromMillis(data.dateJoined)
+        dateJoined: admin.firestore.Timestamp.fromMillis(data.dateJoined)
     };
 
     return await db.collection('users').doc(context.auth.uid).set(userInfo)

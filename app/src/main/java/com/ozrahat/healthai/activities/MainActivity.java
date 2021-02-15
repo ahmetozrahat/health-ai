@@ -1,10 +1,14 @@
 package com.ozrahat.healthai.activities;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.widget.Button;
+import android.widget.Toast;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -34,12 +38,33 @@ public class MainActivity extends AppCompatActivity {
         checkUser();
     }
 
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        // Inflate the options menu.
+        getMenuInflater().inflate(R.menu.menu_main, menu);
+        return super.onCreateOptionsMenu(menu);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        // If 'Log out' clicked, sign out the user and go back to LoginActivity.
+        if(item.getItemId() == R.id.menu_main_logout){
+            firebaseAuth.signOut();
+            finish();
+            startActivity(new Intent(this, LoginActivity.class));
+        }
+        Toast.makeText(this, "deneme", Toast.LENGTH_LONG).show();
+
+        return super.onOptionsItemSelected(item);
+    }
+
     private void setupComponents() {
         openChatsButton = findViewById(R.id.main_open_chats_button);
     }
 
     private void setupListeners() {
-        openChatsButton.setOnClickListener(v -> startActivity(new Intent(MainActivity.this, ChatLogActivity.class)));
+        openChatsButton.setOnClickListener(v ->
+                startActivity(new Intent(MainActivity.this, ChatLogActivity.class)));
     }
 
     private void checkUser() {
