@@ -20,6 +20,7 @@ import android.widget.Toast;
 import com.ozrahat.healthai.R;
 import com.ozrahat.healthai.adapters.MessageAdapter;
 import com.ozrahat.healthai.models.ChatMessage;
+import com.ozrahat.healthai.models.PlaceType;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -135,10 +136,34 @@ public class ChatLogActivity extends AppCompatActivity {
                     recyclerView.smoothScrollToPosition(messageList.size()-1);
                 });
 
+                // We need check for certain codes.
+                // For example if we got code 18, we should show the user near hospitals etc.
+                int responseCode = jsonObject.getInt("code");
+
+                switch (responseCode){
+                    case 17:
+                        // Show the near pharmacies to the user.
+                        showNearPlaces(PlaceType.PHARMACY);
+                        break;
+                    case 18:
+                        // Show the near hospitals to the user.
+                        showNearPlaces(PlaceType.HOSPITAL);
+                        break;
+                    default:
+                        break;
+                }
+
             } catch (JSONException e) {
                 e.printStackTrace();
             }
         }
+    }
+
+    private void showNearPlaces(PlaceType placeType) {
+        Intent intent = new Intent(this, MapsActivity.class);
+        intent.putExtra("place", placeType);
+
+        startActivity(intent);
     }
 
     private void setupListeners() {
@@ -186,6 +211,8 @@ public class ChatLogActivity extends AppCompatActivity {
                 JSONObject jsonObject = new JSONObject();
 
                 try {
+                    jsonObject.put("status", 1);
+                    jsonObject.put("code", 10);
                     jsonObject.put("message", getString(R.string.chat_welcome));
 
                     addMessageToChatlog(jsonObject.toString(), MESSAGE_SENDER_SERVER);

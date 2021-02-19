@@ -2,6 +2,8 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.ozrahat.healthai">
 
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"/>
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION"/>
     <uses-permission android:name="android.permission.INTERNET"/>
 
     <application
@@ -12,8 +14,10 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.HealthAI">
-        <activity android:name=".activities.ChatLogActivity"
-            android:parentActivityName=".activities.MainActivity"/>
+        <activity android:name=".activities.MapsActivity"/>
+        <activity
+            android:name=".activities.ChatLogActivity"
+            android:parentActivityName=".activities.MainActivity" />
         <activity android:name=".activities.CreateProfileActivity" />
         <activity android:name=".activities.RegisterActivity" />
         <activity android:name=".activities.LoginActivity" />
@@ -24,6 +28,11 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
+        <meta-data
+            android:name="com.google.android.geo.API_KEY"
+            android:value=""/>
+
     </application>
 
 </manifest>
