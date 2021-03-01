@@ -2,11 +2,11 @@ package com.ozrahat.healthai.adapters;
 
 import android.content.Context;
 import android.util.DisplayMetrics;
-import android.view.Display;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.WindowManager;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -48,12 +48,25 @@ public class MessageAdapter extends RecyclerView.Adapter<MessageAdapter.ViewHold
     public void onBindViewHolder(@NonNull MessageAdapter.ViewHolder holder, int position) {
         final ChatMessage chatMessage = messages.get(position);
 
-        holder.message.setText(chatMessage.message);
-
         Date date = new Date(chatMessage.date);
         SimpleDateFormat sdf = new SimpleDateFormat("HH:mm", Locale.getDefault());
 
+        holder.message.setText(chatMessage.message);
         holder.date.setText(sdf.format(date));
+
+        if(chatMessage.showTime){
+            holder.date.setVisibility(View.VISIBLE);
+        }else {
+            holder.date.setVisibility(View.GONE);
+        }
+
+        if(chatMessage.sender == 0){
+            if(chatMessage.showProfile){
+                holder.profilePic.setVisibility(View.VISIBLE);
+            }else {
+                holder.profilePic.setVisibility(View.INVISIBLE);
+            }
+        }
     }
 
     @Override
@@ -63,12 +76,14 @@ public class MessageAdapter extends RecyclerView.Adapter<MessageAdapter.ViewHold
 
     public static class ViewHolder extends RecyclerView.ViewHolder {
 
+        public ImageView profilePic;
         public TextView message;
         public TextView date;
 
         public ViewHolder(@NonNull View itemView, Context context) {
             super(itemView);
 
+            profilePic = itemView.findViewById(R.id.chat_bubble_left_pp);
             message = itemView.findViewById(R.id.chat_bubble_message);
             date = itemView.findViewById(R.id.chat_bubble_date);
 

@@ -27,7 +27,9 @@ import org.json.JSONObject;
 
 import java.net.URI;
 import java.net.URISyntaxException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.Locale;
 
@@ -97,13 +99,45 @@ public class ChatLogActivity extends AppCompatActivity {
     private void addMessageToChatlog(String message, @NonNull Integer sender) {
         if(sender.equals(MESSAGE_SENDER_CLIENT)){
             // Sender sent a message, turn it into a ChatMessage object.
-            ChatMessage chatMessage = new ChatMessage(sender, message, System.currentTimeMillis());
+            ChatMessage chatMessage = new ChatMessage(sender, message, System.currentTimeMillis(), false, true);
 
             // Then add it into the RecyclerView and update the UI.
             messageList.add(chatMessage);
             runOnUiThread(() -> {
                 messageAdapter.notifyDataSetChanged();
                 inputTextField.getText().clear();
+
+                // We need to check if there is an previous message.
+                // If there is, then check if the previous message and latest message has same sender.
+                // If yes, then check if they sent at same time.
+                // Like 10:15 and 10:15
+                // We should hide the time of the previous message for better UI.
+
+                if(messageAdapter.getItemCount() > 1){
+                    int position = messageAdapter.getItemCount()-1;
+
+                    while (position > 0){
+                        if(messageList.get(position-1).sender == MESSAGE_SENDER_CLIENT){
+                            // We compare the time of the messages.
+                            SimpleDateFormat sdf = new SimpleDateFormat("HH:mm", Locale.getDefault());
+
+                            Date current = new Date(messageList.get(position).date);
+                            Date previous = new Date(messageList.get(position-1).date);
+
+                            if(sdf.format(current).equals(sdf.format(previous))){
+                                // We hide the time of the previous message.
+                                messageList.get(position-1).showTime = false;
+                            }
+
+                            // We should update the adapter in order to hide the message date.
+                            messageAdapter.notifyItemChanged(position-1);
+                            position--;
+                        }else {
+                            break;
+                        }
+                    }
+                }
+
                 recyclerView.smoothScrollToPosition(messageList.size()-1);
             });
 
@@ -127,12 +161,48 @@ public class ChatLogActivity extends AppCompatActivity {
                 String textMessage = jsonObject.getString("message");
 
                 // Now we should turn it to a ChatMessage object.
-                ChatMessage chatMessage = new ChatMessage(sender, textMessage, System.currentTimeMillis());
+                ChatMessage chatMessage = new ChatMessage(sender, textMessage, System.currentTimeMillis(), true, true);
 
                 // Then add it into the RecyclerView and update the UI.
                 messageList.add(chatMessage);
                 runOnUiThread(() -> {
                     messageAdapter.notifyDataSetChanged();
+
+                    // We need to check if there is an previous message.
+                    // If there is, then check if the previous message and latest message has same sender.
+                    // If yes, we should hide the profile picture of the previous message.
+                    // Also, check if they sent at same time.
+                    // Like 10:15 and 10:15
+                    // We should hide the time of the previous message for better UI.
+
+                    if(messageAdapter.getItemCount() > 1){
+                        int position = messageAdapter.getItemCount()-1;
+
+                        while (position > 0){
+                            if(messageList.get(position-1).sender == MESSAGE_SENDER_SERVER){
+                                // We hide the profile picture of the previous message.
+                                messageList.get(position-1).showProfile = false;
+
+                                // We compare the time of the messages.
+                                SimpleDateFormat sdf = new SimpleDateFormat("HH:mm", Locale.getDefault());
+
+                                Date current = new Date(messageList.get(position).date);
+                                Date previous = new Date(messageList.get(position-1).date);
+
+                                if(sdf.format(current).equals(sdf.format(previous))){
+                                    // We hide the time of the previous message.
+                                    messageList.get(position-1).showTime = false;
+                                }
+
+                                // We should update the adapter in order to hide the message date.
+                                messageAdapter.notifyItemChanged(position-1);
+                                position--;
+                            }else {
+                                break;
+                            }
+                        }
+                    }
+
                     recyclerView.smoothScrollToPosition(messageList.size()-1);
                 });
 
@@ -149,6 +219,9 @@ public class ChatLogActivity extends AppCompatActivity {
                         // Show the near hospitals to the user.
                         showNearPlaces(PlaceType.HOSPITAL);
                         break;
+                    case 21:
+                        // Navigate to BMI Calculator.
+                        startActivity(new Intent(this, BMICalculatorActivity.class));
                     default:
                         break;
                 }
@@ -213,8 +286,15 @@ public class ChatLogActivity extends AppCompatActivity {
                 try {
                     jsonObject.put("status", 1);
                     jsonObject.put("code", 10);
-                    jsonObject.put("message", getString(R.string.chat_welcome));
 
+
+                    jsonObject.put("message", getString(R.string.chat_welcome1));
+                    addMessageToChatlog(jsonObject.toString(), MESSAGE_SENDER_SERVER);
+
+                    jsonObject.put("message", getString(R.string.chat_welcome2));
+                    addMessageToChatlog(jsonObject.toString(), MESSAGE_SENDER_SERVER);
+
+                    jsonObject.put("message", getString(R.string.chat_welcome3));
                     addMessageToChatlog(jsonObject.toString(), MESSAGE_SENDER_SERVER);
                 } catch (JSONException e) {
                     e.printStackTrace();

@@ -163,16 +163,14 @@ public class MapsActivity extends AppCompatActivity {
                         // Now move camera to the users current location.
 
                         googleMap.animateCamera(CameraUpdateFactory.newLatLngZoom(
-                                new LatLng(currentLat, currentLong), 20
+                                new LatLng(currentLat, currentLong), 5
                         ));
 
                     }catch (JSONException e){
                         e.printStackTrace();
                     }
                 },
-                error -> {
-                    Toast.makeText(MapsActivity.this, error.getLocalizedMessage(), Toast.LENGTH_LONG).show();
-                });
+                error -> Toast.makeText(MapsActivity.this, error.getLocalizedMessage(), Toast.LENGTH_LONG).show());
 
         queue.add(stringRequest);
     }

@@ -8,8 +8,8 @@
     <string name="login_page_username_hint">Username</string>
     <string name="login_page_password_hint">Password</string>
     <string name="login_page_login_text">LOGIN</string>
-    <string name="login_page_register_text">Create a free account</string>
-    <string name="login_page_skip_text">Continue as a guest</string>
+    <string name="login_page_register_text">CREATE A FREE ACCOUNT</string>
+    <string name="login_page_skip_text">CONTINUE AS A GUEST</string>
 
     <string name="register_page_title">HealthAI Register</string>
     <string name="register_page_username_hint">Username</string>
@@ -44,16 +44,27 @@
     <string name="tts_speak">Please speak now…</string>
 
     <string name="chat_online">Online</string>
-    <string name="chat_welcome">Welcome to the Django Chatbot.\nPlease type `help` for the commands list.</string>
     <string name="chat_error">An unexpected exception has been occurred. The app may function unintended. Please restart the application.</string>
+
+    <string name="chat_welcome1">Hello, I am HealthAI.</string>
+    <string name="chat_welcome2">Your personal health assistant.</string>
+    <string name="chat_welcome3">How can I help you?</string>
 
     <string name="alert_dialog_success">Success</string>
     <string name="alert_dialog_warning">Warning</string>
+    <string name="alert_dialog_bmi">BMI</string>
 
     <string name="alert_dialog_verification_sent">You have been successfully created your account. We have sent an email to %email. Please verify your account.</string>
     <string name="alert_dialog_not_verified">Looks like you haven\'t been verified your account. Please check your inbox to verify your email.</string>
+    <string name="alert_dialog_bmi_result">Your Body Mass Index is: %bmi. This is considered as %class.</string>
 
     <string name="button_positive">Okay</string>
     <string name="button_send_again">Send Again</string>
     <string name="menu_main_logout">Log out</string>
+    <string name="bmi_calculator_page_title">BMI Calculator</string>
+    <string name="bmi_calculator_page_height_hint">Height</string>
+    <string name="bmi_calculator_page_height_unit_hint">Unit</string>
+    <string name="bmi_calculator_page_weight_hint">Weight Unit</string>
+    <string name="bmi_calculator_page_weight_unit_hint">Unit</string>
+    <string name="bmi_calculator_calculate">Calculate</string>
 </resources>

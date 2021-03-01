@@ -4,11 +4,13 @@ This is an Chatbot app that uses Django Channels and WebSocket connections to in
 
 ## Setup
 
- - You only need to change `server_address` inside the `app/src/main/res/values/strings.xml`
+ - Change `server_address` inside the `strings.xml`
+ - Obtain a Google Places API key and put it into `AndroidManifest.xml` and `strings.xml`
 
 ## References
 
- - This [repo](https://github.com/shafique-md18/HealthAIChatbot) is the server side of this application.
+ - Thanks to [Shafique](https://github.com/shafique-md18) for building the backend.
+ - You can find the [repo](https://github.com/shafique-md18/HealthAIChatbot) here.
 
 ## Screenshots
 

@@ -19,16 +19,20 @@
     <TextView
         android:id="@+id/chat_bubble_message"
         android:layout_width="wrap_content"
-        android:maxWidth="300dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
         android:background="@drawable/left_message_background"
+        android:enabled="true"
+        android:focusable="true"
         android:fontFamily="@font/montserratmedium"
+        android:longClickable="true"
+        android:maxWidth="300dp"
         android:paddingStart="12dp"
         android:paddingTop="6dp"
         android:paddingEnd="12dp"
         android:paddingBottom="6dp"
         android:textColor="@color/textColorHigh"
+        android:textIsSelectable="true"
         app:layout_constraintStart_toEndOf="@+id/chat_bubble_left_pp"
         app:layout_constraintTop_toTopOf="@+id/chat_bubble_left_pp" />
 
