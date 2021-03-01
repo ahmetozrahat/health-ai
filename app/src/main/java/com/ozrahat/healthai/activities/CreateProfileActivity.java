@@ -97,7 +97,7 @@ public class CreateProfileActivity extends AppCompatActivity {
                 }else {
                     // Save the profile information somehow.
                     try {
-                        final int gender = genderInput.getText().toString().equals(Gender.MALE.label) ? Gender.MALE.id : Gender.FEMALE.id;
+                        final String gender = genderInput.getText().toString().equals(Gender.MALE.label) ? Gender.MALE.id : Gender.FEMALE.id;
                         final int height = Integer.parseInt(heightInput.getText().toString());
                         final int heightUnit = heightUnitInput.getText().toString().equals(Units.CM.label) ? Units.CM.id : Units.INCH.id;
                         final int weight = Integer.parseInt(weightInput.getText().toString());
