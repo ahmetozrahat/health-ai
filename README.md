@@ -5,6 +5,10 @@ This is an Chatbot app that uses Django Channels and WebSocket connections to in
 ## Setup
 
  - Change `server_address` inside the `strings.xml`
+ - Create a Firebase Project and switch to `Blaze Plan`.
+ - Drop the `google-services.json` to `app` folder.
+ - You should also activate `Cloud Firestore`, `Authentication` and `Cloud Functions`.
+ - Deploy the `functions` folder using Firebase CLI.
  - Obtain a Google Places API key and put it into `AndroidManifest.xml` and `strings.xml`
 
 ## References
