@@ -12,7 +12,7 @@
         android:layout_marginStart="8dp"
         android:layout_marginTop="2dp"
         android:contentDescription="@string/chatbot_picture"
-        android:src="@drawable/bot_pp"
+        android:src="@drawable/ic_bot_pp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 

@@ -19,7 +19,7 @@
             android:id="@+id/conversation_contact_photo"
             android:layout_width="40dp"
             android:layout_height="40dp"
-            android:src="@drawable/bot_pp"
+            android:src="@drawable/ic_bot_pp"
             android:scaleType="fitCenter"
             android:contentDescription="@string/chatbot_picture"/>
     </LinearLayout>
