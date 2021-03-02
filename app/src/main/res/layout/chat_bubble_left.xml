@@ -10,11 +10,11 @@
         android:layout_width="32dp"
         android:layout_height="32dp"
         android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
+        android:layout_marginTop="2dp"
+        android:contentDescription="@string/chatbot_picture"
         android:src="@drawable/bot_pp"
-        android:contentDescription="@string/chatbot_picture"/>
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:id="@+id/chat_bubble_message"
@@ -24,7 +24,6 @@
         android:background="@drawable/left_message_background"
         android:enabled="true"
         android:focusable="true"
-        android:fontFamily="@font/montserratmedium"
         android:longClickable="true"
         android:maxWidth="300dp"
         android:paddingStart="12dp"
@@ -33,6 +32,9 @@
         android:paddingBottom="6dp"
         android:textColor="@color/textColorHigh"
         android:textIsSelectable="true"
+        android:textSize="16sp"
+        android:typeface="sans"
+        android:fontFamily="sans-serif"
         app:layout_constraintStart_toEndOf="@+id/chat_bubble_left_pp"
         app:layout_constraintTop_toTopOf="@+id/chat_bubble_left_pp" />
 
@@ -41,9 +43,11 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="4dp"
-        android:fontFamily="@font/montserratmedium"
+        android:layout_marginBottom="4dp"
         android:textColor="@color/textColorMedium"
         android:textSize="12sp"
+        android:typeface="sans"
+        android:fontFamily="sans-serif"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="@+id/chat_bubble_message"
         app:layout_constraintTop_toBottomOf="@+id/chat_bubble_message" />

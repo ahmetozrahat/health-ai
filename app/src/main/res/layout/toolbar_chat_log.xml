@@ -47,7 +47,8 @@
             android:maxLines="1"
             android:textSize="18sp"
             android:text="@string/app_name"
-            android:fontFamily="@font/montserratbold"
+            android:typeface="sans"
+            android:fontFamily="sans-serif-medium"
             android:textColor="@color/textColorHigh"/>
 
         <TextView
@@ -58,7 +59,8 @@
             android:layout_weight="0.4"
             android:ellipsize="end"
             android:text="@string/online"
-            android:fontFamily="@font/montserratmedium"
+            android:typeface="sans"
+            android:fontFamily="sans-serif"
             android:textColor="@color/textColorMedium"
             android:maxLines="1"
             android:textSize="12sp" />
