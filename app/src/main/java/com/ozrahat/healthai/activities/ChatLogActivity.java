@@ -17,6 +17,7 @@ import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.Toast;
 
+import com.google.firebase.auth.FirebaseAuth;
 import com.ozrahat.healthai.R;
 import com.ozrahat.healthai.adapters.MessageAdapter;
 import com.ozrahat.healthai.models.ChatMessage;
@@ -53,10 +54,19 @@ public class ChatLogActivity extends AppCompatActivity {
     private static final int MESSAGE_SENDER_SERVER = 0;
     private static final int MESSAGE_SENDER_CLIENT = 1;
 
+    private FirebaseAuth firebaseAuth;
+
+    static ChatLogActivity instance;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_chat_log);
+
+        instance = this;
+
+        // Initialize Firebase Auth.
+        firebaseAuth = FirebaseAuth.getInstance();
 
         // Setup UI Components
         setupComponents();
@@ -69,6 +79,10 @@ public class ChatLogActivity extends AppCompatActivity {
 
         // Initialize the WebSocket connection.
         setupConnection();
+    }
+
+    public static ChatLogActivity getInstance(){
+        return instance;
     }
 
     private void setupToolbar() {
@@ -96,7 +110,7 @@ public class ChatLogActivity extends AppCompatActivity {
         recyclerView.setAdapter(messageAdapter);
     }
 
-    private void addMessageToChatlog(String message, @NonNull Integer sender) {
+    public void addMessageToChatlog(String message, @NonNull Integer sender) {
         if(sender.equals(MESSAGE_SENDER_CLIENT)){
             // Sender sent a message, turn it into a ChatMessage object.
             ChatMessage chatMessage = new ChatMessage(sender, message, System.currentTimeMillis(), false, true);
@@ -222,6 +236,29 @@ public class ChatLogActivity extends AppCompatActivity {
                     case 21:
                         // Navigate to BMI Calculator.
                         startActivity(new Intent(this, BMICalculatorActivity.class));
+                        break;
+                    case 22:
+                        // Navigate to Profile Activity.
+                        // But first, check if user logged in or not.
+                        if(firebaseAuth.getCurrentUser() != null){
+                            // User has logged in, send him/her to Profile Activity.
+                            startActivity(new Intent(ChatLogActivity.this, ProfileActivity.class));
+                        }else {
+                            // User hasn't logged in yet.
+                            // Warn him/her with a chat message.
+                            JSONObject warningJSONObject = new JSONObject();
+
+                            try {
+                                warningJSONObject.put("status", 1);
+                                warningJSONObject.put("code", 10);
+                                warningJSONObject.put("message", getString(R.string.warning_not_logged_in));
+
+                                addMessageToChatlog(warningJSONObject.toString(), MESSAGE_SENDER_SERVER);
+                            } catch (JSONException e) {
+                                e.printStackTrace();
+                            }
+                        }
+                        break;
                     default:
                         break;
                 }

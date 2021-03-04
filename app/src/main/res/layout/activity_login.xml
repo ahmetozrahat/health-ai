@@ -100,7 +100,7 @@
             <com.google.android.material.button.MaterialButton
                 android:id="@+id/login_page_register_button"
                 style="@style/Widget.MaterialComponents.Button.TextButton"
-                android:layout_width="0dp"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="32dp"
                 android:layout_marginLeft="32dp"
@@ -118,7 +118,7 @@
             <com.google.android.material.button.MaterialButton
                 android:id="@+id/login_page_skip_button"
                 style="@style/Widget.MaterialComponents.Button.TextButton"
-                android:layout_width="0dp"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="32dp"
                 android:layout_marginLeft="32dp"

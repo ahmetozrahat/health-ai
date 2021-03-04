@@ -87,9 +87,6 @@ public class MessageAdapter extends RecyclerView.Adapter<MessageAdapter.ViewHold
             message = itemView.findViewById(R.id.chat_bubble_message);
             date = itemView.findViewById(R.id.chat_bubble_date);
 
-            DisplayMetrics displayMetrics = new DisplayMetrics();
-            WindowManager wm = (WindowManager)context.getSystemService(Context.WINDOW_SERVICE);
-            wm.getDefaultDisplay().getMetrics(displayMetrics);
         }
     }
 

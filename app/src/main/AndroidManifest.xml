@@ -14,6 +14,10 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.HealthAI">
+        <activity
+            android:name=".activities.ProfileActivity"
+            android:parentActivityName=".activities.ChatLogActivity"
+            android:theme="@style/Theme.HealthAI.NoActionBar"/>
         <activity android:name=".activities.BMICalculatorActivity" />
         <activity android:name=".activities.MapsActivity" />
         <activity
@@ -33,7 +37,6 @@
         <meta-data
             android:name="com.google.android.geo.API_KEY"
             android:value=""/>
-
     </application>
 
 </manifest>

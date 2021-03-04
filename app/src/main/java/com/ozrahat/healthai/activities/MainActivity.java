@@ -2,6 +2,7 @@ package com.ozrahat.healthai.activities;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -15,6 +16,8 @@ import com.google.firebase.auth.FirebaseUser;
 import com.ozrahat.healthai.R;
 
 public class MainActivity extends AppCompatActivity {
+
+    private Toolbar toolbar;
 
     private Button openChatsButton;
 
@@ -33,9 +36,6 @@ public class MainActivity extends AppCompatActivity {
 
         // Initialize Firebase Auth.
         firebaseAuth = FirebaseAuth.getInstance();
-
-        // Check if the user is logged in or not.
-        checkUser();
     }
 
     @Override
@@ -47,19 +47,17 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
-        // If 'Log out' clicked, sign out the user and go back to LoginActivity.
-        if(item.getItemId() == R.id.menu_main_logout){
-            firebaseAuth.signOut();
-            finish();
-            startActivity(new Intent(this, LoginActivity.class));
+        if(item.getItemId() == R.id.menu_main_profile){
+            checkUser();
         }
-        Toast.makeText(this, "deneme", Toast.LENGTH_LONG).show();
-
         return super.onOptionsItemSelected(item);
     }
 
     private void setupComponents() {
+        toolbar = findViewById(R.id.main_toolbar);
         openChatsButton = findViewById(R.id.main_open_chats_button);
+
+        setSupportActionBar(toolbar);
     }
 
     private void setupListeners() {
@@ -72,7 +70,10 @@ public class MainActivity extends AppCompatActivity {
         FirebaseUser currentUser = firebaseAuth.getCurrentUser();
         if(currentUser != null){
             // User has logged in.
+            startActivity(new Intent(MainActivity.this, ProfileActivity.class));
         }else {
+            // User hasn't logged in.
+            Toast.makeText(MainActivity.this, getString(R.string.warning_not_logged_in), Toast.LENGTH_LONG).show();
             startActivity(new Intent(this, LoginActivity.class));
         }
     }

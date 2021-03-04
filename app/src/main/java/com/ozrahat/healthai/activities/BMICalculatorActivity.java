@@ -2,6 +2,7 @@ package com.ozrahat.healthai.activities;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.Activity;
 import android.os.Bundle;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
@@ -13,6 +14,9 @@ import com.google.android.material.textfield.TextInputEditText;
 import com.ozrahat.healthai.R;
 import com.ozrahat.healthai.models.BMI;
 import com.ozrahat.healthai.models.Units;
+
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.text.DecimalFormat;
 
@@ -92,15 +96,22 @@ public class BMICalculatorActivity extends AppCompatActivity {
 
                 DecimalFormat bmiFormat = new DecimalFormat("#.##");
 
-                new MaterialAlertDialogBuilder(this)
-                        .setTitle(getString(R.string.alert_dialog_bmi))
-                        .setMessage(
-                                getString(R.string.alert_dialog_bmi_result)
-                                        .replace("%bmi", bmiFormat.format(bmi))
-                                        .replace("%class", bmiClass.label)
-                                )
-                        .setPositiveButton(getString(R.string.button_positive), (dialog, which) -> {})
-                        .show();
+                JSONObject jsonObject = new JSONObject();
+
+                try {
+                    jsonObject.put("status", 1);
+                    jsonObject.put("code", 10);
+                    jsonObject.put("message",
+                            getString(R.string.alert_dialog_bmi_result)
+                            .replace("%bmi", bmiFormat.format(bmi))
+                            .replace("%class", bmiClass.label));
+
+                    ChatLogActivity activity = ChatLogActivity.getInstance();
+                    activity.addMessageToChatlog(jsonObject.toString(), 0);
+                    finish();
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
             }
         });
     }

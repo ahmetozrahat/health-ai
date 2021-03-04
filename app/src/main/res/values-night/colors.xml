@@ -15,4 +15,6 @@
 
     <color name="left_chat_bubble_background">#343435</color>
     <color name="chat_input_background">#212121</color>
+
+    <color name="toolbar_background">#282828</color>
 </resources>

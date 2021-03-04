@@ -144,7 +144,7 @@
             <com.google.android.material.button.MaterialButton
                 android:id="@+id/register_page_login_button"
                 style="@style/Widget.MaterialComponents.Button.TextButton"
-                android:layout_width="0dp"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="32dp"
                 android:layout_marginLeft="32dp"

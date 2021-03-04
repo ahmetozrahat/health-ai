@@ -8,4 +8,16 @@
         <item name="windowActionBar">false</item>
         <item name="windowNoTitle">true</item>
     </style>
+
+    <style name="Theme.HealthAI.NoActionBar">
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+    </style>
+
+    <style name="Theme.HealthAI.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar">
+        <item name="colorPrimary">@color/toolbar_background</item>
+    </style>
+
+    <style name="Theme.HealthAI.PopupOverlay" parent="ThemeOverlay.AppCompat.Light">
+    </style>
 </resources>
