@@ -40,6 +40,7 @@ public class MapsActivity extends AppCompatActivity {
     private GoogleMap googleMap;
 
     private final int LOCATION_PERM_REQUEST_CODE = 1000;
+    private final int CAMERA_ZOOM_CONSTANT = 15;
 
     private double currentLat = 0, currentLong = 0;
     private ArrayList<Place> places;
@@ -163,7 +164,7 @@ public class MapsActivity extends AppCompatActivity {
                         // Now move camera to the users current location.
 
                         googleMap.animateCamera(CameraUpdateFactory.newLatLngZoom(
-                                new LatLng(currentLat, currentLong), 5
+                                new LatLng(currentLat, currentLong), CAMERA_ZOOM_CONSTANT
                         ));
 
                     }catch (JSONException e){
