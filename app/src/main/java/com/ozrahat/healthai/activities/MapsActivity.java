@@ -89,7 +89,6 @@ public class MapsActivity extends AppCompatActivity {
                         // Get PlaceType from intent extra.
                         // Then get the nearby places corresponding to this type.
                         PlaceType placeType = (PlaceType) getIntent().getSerializableExtra("place");
-                        Log.d("place", placeType.id);
 
                         getNearbyPlaces(placeType);
                     });
@@ -158,15 +157,15 @@ public class MapsActivity extends AppCompatActivity {
                             markerOptions.position(latLng);
                             markerOptions.title(place.name);
                             googleMap.addMarker(markerOptions);
+
+                            if(i==places.size()-1){
+                                // This is the last index of the list.
+                                // We should animate camera here.
+                                googleMap.animateCamera(CameraUpdateFactory.newLatLngZoom(
+                                        new LatLng(currentLat, currentLong), CAMERA_ZOOM_CONSTANT
+                                ));
+                            }
                         }
-
-                        // Everything is set-up.
-                        // Now move camera to the users current location.
-
-                        googleMap.animateCamera(CameraUpdateFactory.newLatLngZoom(
-                                new LatLng(currentLat, currentLong), CAMERA_ZOOM_CONSTANT
-                        ));
-
                     }catch (JSONException e){
                         e.printStackTrace();
                     }
