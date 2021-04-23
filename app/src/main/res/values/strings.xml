@@ -39,10 +39,12 @@
 
     <string name="warning_passwords_not_match">Passwords do not match. Please check.</string>
     <string name="warning_fill_the_blanks">Please fill the necessary fields.</string>
+    <string name="warning_not_logged_in">It looks like you haven\'t logged in yet. Please log in to see your profile.</string>
+    <string name="warning_stt_not_supported">Your device does not support Speech to Text feature.</string>
+    <string name="warning_cant_get_location">There is been an error while trying to get your location.</string>
 
     <string name="male">Male</string>
     <string name="female">Female</string>
-    <string name="warning_stt_not_supported">Your device does not support Speech to Text feature.</string>
     <string name="chatbot_picture">chatbot_picture</string>
     <string name="online">online</string>
     <string name="send_button">Send Button</string>
@@ -74,7 +76,6 @@
     <string name="main_info_text">Hello, I\'m HealthAI. Your personal health assistant. You can ask me anything.</string>
 
     <string name="title_activity_profile">ScrollingActivity</string>
-    <string name="warning_not_logged_in">It looks like you haven\'t logged in yet. Please log in to see your profile.</string>
     <string name="profile_page_username">Username</string>
     <string name="profile_page_email">Email</string>
     <string name="profile_page_datejoined">Date Joined</string>

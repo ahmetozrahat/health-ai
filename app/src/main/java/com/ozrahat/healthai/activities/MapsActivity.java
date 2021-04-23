@@ -8,24 +8,21 @@ import android.Manifest;
 import android.content.pm.PackageManager;
 import android.location.Location;
 import android.os.Bundle;
-import android.util.Log;
 import android.widget.Toast;
 
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
-import com.google.android.gms.location.FusedLocationProviderClient;
-import com.google.android.gms.location.LocationServices;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
-import com.google.android.gms.tasks.Task;
 import com.ozrahat.healthai.R;
 import com.ozrahat.healthai.models.Place;
 import com.ozrahat.healthai.models.PlaceType;
+import com.ozrahat.healthai.utilities.CurrentLocation;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -33,17 +30,17 @@ import org.json.JSONObject;
 
 import java.util.ArrayList;
 
-public class MapsActivity extends AppCompatActivity {
+public class MapsActivity extends AppCompatActivity{
 
-    private FusedLocationProviderClient fusedLocationProviderClient;
     private SupportMapFragment supportMapFragment;
     private GoogleMap googleMap;
 
     private final int LOCATION_PERM_REQUEST_CODE = 1000;
     private final int CAMERA_ZOOM_CONSTANT = 15;
 
-    private double currentLat = 0, currentLong = 0;
     private ArrayList<Place> places;
+
+    private CurrentLocation currentLocation;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -59,14 +56,15 @@ public class MapsActivity extends AppCompatActivity {
     private void setupComponents() {
         supportMapFragment = (SupportMapFragment) getSupportFragmentManager()
                 .findFragmentById(R.id.fragment_map);
-        // Initialize fused location provider client.
-        fusedLocationProviderClient = LocationServices.getFusedLocationProviderClient(this);
 
-        // We should get users current location.
+        // Request runtime permissions for using location.
+        requestLocationPermission();
+
+        // Get the current location and find nearby places.
         getCurrentLocation();
     }
 
-    private void getCurrentLocation() {
+    private void requestLocationPermission(){
         // Check for Location permissions.
         if (ActivityCompat.checkSelfPermission(MapsActivity.this,
                 Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED &&
@@ -74,32 +72,35 @@ public class MapsActivity extends AppCompatActivity {
                         Manifest.permission.ACCESS_COARSE_LOCATION) == PackageManager.PERMISSION_GRANTED) {
             // Permission granted.
             // Get the current location.
-            Task<Location> task = fusedLocationProviderClient.getLastLocation();
-            task.addOnSuccessListener(location -> {
-                // Task succeeded, check if Location is null.
-                if(location != null) {
-                    // Get the Latitude and Longitude.
-                    currentLat = location.getLatitude();
-                    currentLong = location.getLongitude();
-
-                    supportMapFragment.getMapAsync(map -> {
-                        // When map is ready, we have a callback.
-                        googleMap = map;
-
-                        // Get PlaceType from intent extra.
-                        // Then get the nearby places corresponding to this type.
-                        PlaceType placeType = (PlaceType) getIntent().getSerializableExtra("place");
-
-                        getNearbyPlaces(placeType);
-                    });
-                }
-
-            });
+            getCurrentLocation();
         }else {
             // Permissions not granted, ask user for location permissions.
             ActivityCompat.requestPermissions(MapsActivity.this,
                     new String[]{Manifest.permission.ACCESS_FINE_LOCATION, Manifest.permission.ACCESS_COARSE_LOCATION}, LOCATION_PERM_REQUEST_CODE);
         }
+    }
+
+    private void getCurrentLocation() {
+        CurrentLocation.LocationResult locationResult = new CurrentLocation.LocationResult() {
+            @Override
+            public void gotLocation(Location location) {
+                Toast.makeText(MapsActivity.this, "Lat:"+location.getLatitude()+", Long"+location.getLongitude(), Toast.LENGTH_LONG).show();
+
+                supportMapFragment.getMapAsync(map -> {
+                    // When map is ready, we have a callback.
+                    googleMap = map;
+
+                    // Get PlaceType from intent extra.
+                    // Then get the nearby places corresponding to this type.
+                    PlaceType placeType = (PlaceType) getIntent().getSerializableExtra("place");
+
+                    getNearbyPlaces(placeType, location);
+                });
+            }
+        };
+
+        currentLocation = new CurrentLocation();
+        currentLocation.getLocation(this, locationResult);
     }
 
     /**
@@ -110,10 +111,10 @@ public class MapsActivity extends AppCompatActivity {
      *  for more detailed information.
      */
 
-    private void getNearbyPlaces(PlaceType placeType) {
+    private void getNearbyPlaces(PlaceType placeType, Location location) {
         // Construct the Places API url.
         String url = "https://maps.googleapis.com/maps/api/place/nearbysearch/json"
-                + "?location=" + currentLat + "," + currentLong
+                + "?location=" + location.getLatitude() + "," + location.getLongitude()
                 + "&radius=5000"
                 + "&types=" + placeType.id
                 + "&sensor=true"
@@ -162,7 +163,7 @@ public class MapsActivity extends AppCompatActivity {
                                 // This is the last index of the list.
                                 // We should animate camera here.
                                 googleMap.animateCamera(CameraUpdateFactory.newLatLngZoom(
-                                        new LatLng(currentLat, currentLong), CAMERA_ZOOM_CONSTANT
+                                        new LatLng(location.getLatitude(), location.getLongitude()), CAMERA_ZOOM_CONSTANT
                                 ));
                             }
                         }
@@ -184,5 +185,12 @@ public class MapsActivity extends AppCompatActivity {
                 getCurrentLocation();
             }
         }
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        // This will prevent the app crashing If user closes the activity before location found.
+        currentLocation.cancelListener();
     }
 }
